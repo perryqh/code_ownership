@@ -278,7 +278,7 @@ RSpec.describe CodeOwnership do
     before { create_non_empty_application }
 
     it 'delegates to libcodeowners' do
-      result = FastCodeowners.for_team("team1")
+      result = FastCodeOwners.for_team("team1")
       expect(result).to eq({output: ["success dog", "team1"], success: true})
     end
 

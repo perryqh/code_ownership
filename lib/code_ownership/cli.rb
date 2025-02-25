@@ -60,14 +60,19 @@ module CodeOwnership
                   File.exist?(file)
                 end
               else
-                nil
+                []
               end
-
-      CodeOwnership.validate!(
-        files: files,
-        autocorrect: !options[:skip_autocorrect],
-        stage_changes: !options[:skip_stage]
-      )
+      if options[:skip_autocorrect]
+        FastCodeOwners.validate(
+          files,
+          #!options[:skip_stage]
+        )
+      else
+        FastCodeOwners.generate_and_validate(
+          files,
+          #!options[:skip_stage]
+        )
+      end
     end
 
     # For now, this just returns team ownership
